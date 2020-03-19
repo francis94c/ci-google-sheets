@@ -17,6 +17,16 @@ class GSpreadSheets
   private $lastResponseCode;
 
   /**
+   * [__construct description]
+   * @date  2020-03-19
+   * @param [type]     $params [description]
+   */
+  public function __construct(?array $params=null)
+  {
+    if ($params != null) $this->init($params);
+  }
+
+  /**
    * [init Initialize library with cofigs. Can be called multiple times to set
    *       config items]
    * @param array $config Associative Config Array.
