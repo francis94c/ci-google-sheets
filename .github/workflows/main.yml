@@ -1,0 +1,30 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v1
+      with:
+        php-version: '7.3'
+        extensions: mbstring, intl pdo_mysql
+        ini-values: post_max_size=256M, short_open_tag=On
+        coverage: pcov
+        tools: phpunit:8.2.3
+
+    - name: Composer Install Coveralls.
+      run: composer require php-coveralls/php-coveralls
+
+    - name: Run Unit Tests.
+      run: phpunit --coverage-clover coverage.xml

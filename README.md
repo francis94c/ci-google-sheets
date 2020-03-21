@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/74094c1eb75848df7491/maintainability)](https://codeclimate.com/github/francis94c/ci-google-sheets/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/74094c1eb75848df7491/maintainability)](https://codeclimate.com/github/francis94c/ci-google-sheets/maintainability) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/francis94c/ci-google-sheets/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/francis94c/ci-google-sheets/?branch=master)
 
 # ci-google-sheets
 
