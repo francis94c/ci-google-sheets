@@ -218,6 +218,28 @@ class GSheets
   }
 
   /**
+   * [update description]
+   * @date   2020-03-22
+   * @param  GValueRange $value [description]
+   * @return [type]             [description]
+   */
+  public function update(GValueRange $value):?object
+  {
+    list($code, $response) = (new GSheetsRequest(GSheetsRequest::POST))(
+      self::API . $value->getSpreadSheetId() . "/values/{$value->getRange()}" . $this->build_url_query([
+        'valueInputOption'        => $value->getValueInputOption(),
+        'includeValuesInResponse' => $value->getIncludeValuesInResponse()
+      ]),
+      ["Authorization: Bearer $this->accessToken"],
+      $value->toArray()
+    );
+    $this->lastResponseCode = $code;
+    $this->lastResponse = $response;
+    if ($code == 200) return $this->process_response($code, $response);
+    return null;
+  }
+
+  /**
    * [getLastResponse description]
    * @date   2020-03-15
    * @return string     [description]

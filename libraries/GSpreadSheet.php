@@ -129,7 +129,7 @@ class GSpreadSheet
   public function getFirstSheet():?GSheet
   {
     if (count($this->sheets) == 0) return null;
-    $this->sheetsIndex = 0;    
+    $this->sheetsIndex = 0;
     return gsheet()->fromArray($this->sheets[$this->sheetsIndex]);
   }
 
@@ -172,6 +172,16 @@ class GSpreadSheet
     foreach ($array['sheets'] as $sheet) $this->sheets[] = $sheet;
 
     return $this;
+  }
+
+  /**
+   * [create description]
+   * @date   2020-03-22
+   * @return GSpreadSheet [description]
+   */
+  public function create():GSpreadSheet
+  {
+    return get_instance()->gsheets->createSpreadSheet($this);
   }
 
   /**

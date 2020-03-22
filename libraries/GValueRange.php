@@ -12,7 +12,7 @@ class GValueRange
   private $spreadsheetId;
   private $range;
   private $valueInputOption = self::VALUE_INPUT_USER_ENTERED;
-  private $includeValuesInResponse;
+  private $includeValuesInResponse = false;
   private $responseValueRenderOption;
   private $responseDateTimeRenderOption;
 
@@ -87,6 +87,16 @@ class GValueRange
   }
 
   /**
+   * [getRange description]
+   * @date   2020-03-22
+   * @return string     [description]
+   */
+  public function getRange():string
+  {
+    return $this->range;
+  }
+
+  /**
    * [getSpreadSheetId description]
    * @date   2020-03-21
    * @return string     [description]
@@ -119,11 +129,21 @@ class GValueRange
   /**
    * [batchUpdate description]
    * @date   2020-03-22
-   * @return [type]     [description]
+   * @return [type] [description]
    */
   public function batchUpdate():?object
   {
     return get_instance()->gsheets->batchUpdate($this);
+  }
+
+  /**
+   * [update description]
+   * @date   2020-03-22
+   * @return [type] [description]
+   */
+  public function update():?object
+  {
+    return get_instance()->gsheets->update($this);
   }
 
 
