@@ -182,7 +182,6 @@ class GSheets
    */
   public function createSpreadSheet(GSpreadSheet $spreadSheet):?GSpreadSheet
   {
-    //dd(json_encode($spreadSheet->toArray()));
     list($code, $response) = (new GSheetsRequest(GSheetsRequest::POST))(
       self::API,
       ["Authorization: Bearer $this->accessToken"],
@@ -196,6 +195,25 @@ class GSheets
       return gspreadsheet()->fromJson($response);
     }
 
+    return null;
+  }
+
+  /**
+   * [batchUpdate description]
+   * @date   2020-03-22
+   * @param  GValueRange $value [description]
+   * @return [type]             [description]
+   */
+  public function batchUpdate(GValueRange $value):?object
+  {
+    list($code, $response) = (new GSheetsRequest(GSheetsRequest::POST))(
+      self::API . $value->getSpreadSheetId() . '/values:batchUpdate',
+      ["Authorization: Bearer $this->accessToken"],
+      $value->toArray(true)
+    );
+    $this->lastResponseCode = $code;
+    $this->lastResponse = $response;
+    if ($code == 200) return $this->process_response($code, $response);
     return null;
   }
 

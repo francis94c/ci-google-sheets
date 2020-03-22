@@ -28,3 +28,10 @@ if (!function_exists('gspreadsheet')) {
     return new GSpreadSheet();
   }
 }
+
+if (!function_exists('gvalue_range')) {
+  function gvalue_range(string $spreadsheetId, ?string $range=null, string $majorDimension=GValueRange::DIMENSION_ROWS):GValueRange
+  {
+    return new GValueRange($spreadsheetId, $range, $majorDimension);
+  }
+}
