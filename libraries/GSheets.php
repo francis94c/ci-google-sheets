@@ -224,11 +224,11 @@ class GSheets
    * @return [type]             [description]
    */
   public function update(GValueRange $value):?object
-  {
-    list($code, $response) = (new GSheetsRequest(GSheetsRequest::POST))(
-      self::API . $value->getSpreadSheetId() . "/values/{$value->getRange()}" . $this->build_url_query([
+  {    
+    list($code, $response) = (new GSheetsRequest(GSheetsRequest::PUT))(
+      self::API . $value->getSpreadSheetId() . '/values/' . rawurlencode($value->getRange()) . $this->build_url_query([
         'valueInputOption'        => $value->getValueInputOption(),
-        'includeValuesInResponse' => $value->getIncludeValuesInResponse()
+        'includeValuesInResponse' => $value->getIncludeValuesInResponse() ? 'true' : 'false'
       ]),
       ["Authorization: Bearer $this->accessToken"],
       $value->toArray()

@@ -16,6 +16,12 @@ class GSheetsRequest
   const POST = 'POST';
 
   /**
+   * [PUT description]
+   * @var string
+   */
+  const PUT = 'PUT';
+
+  /**
    * [private description]
    * @var [type]
    */
@@ -58,16 +64,20 @@ class GSheetsRequest
     curl_setopt($ch, CURLOPT_USERAGENT, 'CI GSheets API');
 
     // Request Method and Body.
-    if ($this->verb == self::POST) {
-      curl_setopt($ch, CURLOPT_POST, true);
-      if ($body) curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+    if ($this->verb == self::POST || $this->verb == self::PUT) {
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+      if ($this->verb == self::POST) {
+        curl_setopt($ch, CURLOPT_POST, true);
+      } else {
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+      }
     }
 
     // Exec.
     $response = curl_exec($ch);
     $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     return [$code, $response];
   }
 }

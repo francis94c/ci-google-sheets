@@ -55,7 +55,8 @@ class GValueRange
    */
   public function values(array $array):GValueRange
   {
-    $this->values = $values;
+    $this->values = $array;
+    return $this;
   }
 
   /**
